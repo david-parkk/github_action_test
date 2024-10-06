@@ -33,3 +33,11 @@ jobs:
       - name: Print the input tag to STDOUT
         run: echo Hello github action
         #run: echo  The tags are ${{ inputs.tags }}
+
+  print_context:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+        run: |
+          echo $EVENT_CONTEXT
