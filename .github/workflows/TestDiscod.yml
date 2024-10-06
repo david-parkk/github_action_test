@@ -2,6 +2,9 @@ name: discord message
 
 on:
   push:
+  pull_request:
+    types:
+      - opened
 #    inputs:
 #      logLevel:
 #        description: 'Log level'
