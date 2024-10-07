@@ -43,16 +43,23 @@ jobs:
 #        run: echo "$GITHUB_CONTEXT"
 #        env:
 #          GITHUB_CONTEXT: ${{ toJson(github) }}
-      - name: Set and Use Variable in Same Step
+      - name: 상황에 맞는 메세지를 결정한다.
         run: |
           if [ "${{ github.event.action }}" == "opened" ]; then
               echo "PR_ACTION_MESSAGE=PR 생성되었습니다" >> $GITHUB_ENV
           elif [ "${{ github.event.action }}" == "reopened" ]; then
               echo "PR_ACTION_MESSAGE=PR 재생성 되었습니다" >> $GITHUB_ENV
-          elif [ "${{ github.event.action }}" == "synchronize" ]; then
-              echo "PR_ACTION_MESSAGE=기존 PR에 추가 commit 이 있습니다" >> $GITHUB_ENV
           else
               PR_ACTION_MESSAGE="Unknown action" >> $GITHUB_ENV
+          fi
+      - name: 사용자를
+        run: |
+          if [ "${{ github.actor }}" == "david-parkk" ]; then
+              echo "DISCORD_USER_ID=<@568069533214965760>" >> $GITHUB_ENV
+          elif [ "${{ github.actor }}" == "github_username_2" ]; then
+              echo "DISCORD_USER_ID=<@234567890123456789>" >> $GITHUB_ENV
+          else
+              echo "DISCORD_USER_ID=<@default_discord_user_id>" >> $GITHUB_ENV
           fi
       - name: Actions for Discord
         uses: Ilshidur/action-discord@master
@@ -72,8 +79,8 @@ jobs:
                
               "fields": [
                 {
-                  "name": "own?",
-                  "value": "<@568069533214965760>",
+                  "name": "owner",
+                  "value": "<@ ${{env.DISCORD_USER_ID}}>",
                   "inline": true
                 },
                 {
