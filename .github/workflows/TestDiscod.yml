@@ -91,8 +91,8 @@ jobs:
                   "inline": true
                 },
                 {
-                  "name": "content",
-                  "value": "asdfdsf"
+                  "name": "내용",
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
                   
                 }
               ] 
