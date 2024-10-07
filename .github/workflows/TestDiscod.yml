@@ -52,14 +52,14 @@ jobs:
           else
               PR_ACTION_MESSAGE="Unknown action" >> $GITHUB_ENV
           fi
-      - name: 사용자를
+      - name: 작업자와 리뷰어를 결정한다.
         run: |
           if [ "${{ github.actor }}" == "david-parkk" ]; then
-              echo "DISCORD_USER_ID=<@568069533214965760>" >> $GITHUB_ENV
-          elif [ "${{ github.actor }}" == "github_username_2" ]; then
-              echo "DISCORD_USER_ID=<@234567890123456789>" >> $GITHUB_ENV
+              echo "DISCORD_OWNER_ID=<@568069533214965760>" >> $GITHUB_ENV
+              echo "DISCORD_REVIEWER_ID=<@373383545873235970>" >> $GITHUB_ENV
           else
-              echo "DISCORD_USER_ID=<@default_discord_user_id>" >> $GITHUB_ENV
+              echo "DISCORD_OWNER_ID=<@373383545873235970>" >> $GITHUB_ENV
+              echo "DISCORD_REVIEWER_ID=<@568069533214965760>" >> $GITHUB_ENV
           fi
       - name: Actions for Discord
         uses: Ilshidur/action-discord@master
@@ -79,13 +79,13 @@ jobs:
                
               "fields": [
                 {
-                  "name": "owner",
-                  "value": "${{env.DISCORD_USER_ID}}",
+                  "name": "작업자",
+                  "value": "${{env.DISCORD_OWNER_ID}}",
                   "inline": true
                 },
                 {
-                  "name": "reviewer",
-                  "value": "<@373383545873235970>",
+                  "name": "리뷰어",
+                  "value": "${{env.DISCORD_REVIEWER_ID}}",
                   "inline": true
                 },
                 {
