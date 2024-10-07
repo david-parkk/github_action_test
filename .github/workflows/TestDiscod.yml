@@ -49,13 +49,11 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_USERNAME: 아워메뉴봇
-          DISCORD_AVATAR:
-          #DISCORD_EMBEDS: something
           DISCORD_EMBEDS: '
           [
             { 
               "title":"${{github.event.head_commit.message}}", 
-              "footer":{"text":"Pushed by ${{github.event.number}}"} 
+              "footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"} 
             }
           ]'
       - name: echo
