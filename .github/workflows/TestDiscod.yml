@@ -48,26 +48,11 @@ jobs:
           #DISCORD_EMBEDS: something
           DISCORD_EMBEDS: |
             [{
-              "title": "Project Deployed",
+              "title": "PR이 게시되었습니다",
               "description": "The project **{{ EVENT_PAYLOAD.repository.full_name }}** has been successfully deployed.",
               "color": 3066993, # Green color
-              "fields": [
-                {
-                  "name": "Repository",
-                  "value": "{{ EVENT_PAYLOAD.repository.full_name }}",
-                  "inline": true
-                },
-                {
-                  "name": "Commit",
-                  "value": "{{ EVENT_PAYLOAD.head_commit.message }}",
-                  "inline": true
-                }
-              ],
-              "footer": {
-                "text": "Deployment Bot",
-                "icon_url": "https://example.com/bot-icon.png" # Optional: replace with actual icon URL
-              },
-              "timestamp": "{{ now }}"
+
+              
             }]
         with:
           args: ''
