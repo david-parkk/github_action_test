@@ -74,12 +74,12 @@ jobs:
               "fields": [
                 {
                   "name": "작업자",
-                  "value": "${{env.DISCORD_OWNER_ID}}",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n",
                   "inline": true
                 },
                 {
                   "name": "리뷰어",
-                  "value": "${{env.DISCORD_REVIEWER_ID}}",
+                  "value": "${{env.DISCORD_REVIEWER_ID}}\n",
                   "inline": true
                 },
                 {
