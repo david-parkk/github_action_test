@@ -56,6 +56,9 @@ jobs:
               
               }
             ]`
+      - name: echo
+        run: |
+          echo ${{github.event_name}}
 
 #        with:
 #          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
