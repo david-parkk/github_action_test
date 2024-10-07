@@ -53,10 +53,27 @@ jobs:
           DISCORD_EMBEDS: '
           [
             { 
+              
               "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
               "url": "${{github.event.pull_request.html_url}}",
-              "title": "PR 있습니다~" 
-               
+              "title": "리뷰할 PR 있습니다~" 
+              "fields":[
+                {
+                  "name": "작성자",
+                  "value": ${{github.actor}},
+                  "inline": true
+                },
+                {
+                  "name": "리뷰어",
+                  "value": ${{github.actor}},
+                  "inline": true
+                },
+                {
+                  "name": "내용",
+                  "value": ${{github.event.pull_request.title}},
+                  "inline": false
+                }
+              ] 
             }
           ]'
 
