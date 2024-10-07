@@ -50,13 +50,14 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_USERNAME: 아워메뉴봇
           #"footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"}
-#          "author": { "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-#                      "url": "${{github.event.pull_request.html_url}}",
-#                      "title": "리뷰할 PR 있습니다~"
+          "author": { "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+                      "url": "${{github.event.pull_request.html_url}}",
+                      "title": "리뷰할 PR 있습니다~"
           DISCORD_EMBEDS: '
           [
             { 
-              
+              "url": "${{github.event.pull_request.html_url}}",
+              "title": "리뷰할 PR 있습니다~(같이 사용되나?)",
                
               "fields": [
                 {
