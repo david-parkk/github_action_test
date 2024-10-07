@@ -48,8 +48,8 @@ jobs:
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_USERNAME: 아워메뉴봇
-          DISCORD_AVATAR: https://github.com/user-attachments/assets/2f3e5833-4c1c-4001-b32c-7c64e5b9f15d
+          DISCORD_USERNAME: 봇
+          DISCORD_AVATAR: "https://github.com/user-attachments/assets/2f3e5833-4c1c-4001-b32c-7c64e5b9f15d"
           #"footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"}
 #          "author": { "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
 #                      "url": "${{github.event.pull_request.html_url}}",
