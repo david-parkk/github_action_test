@@ -58,7 +58,7 @@ jobs:
             { 
               
                
-              "fields":[
+              "fields": [
                 {
                   "name": "authoer",
                   "value": "adfasdfd",
@@ -71,7 +71,7 @@ jobs:
                 },
                 {
                   "name": "content",
-                  "value": "asdfdsf",
+                  "value": "asdfdsf"
                   
                 }
               ] 
