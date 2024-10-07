@@ -28,13 +28,13 @@ jobs:
 #          echo Hello github action
 #        #run: echo  The tags are ${{ inputs.tags }}
 #
-  print_context:
-    runs-on: ubuntu-latest
-    steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
+#  print_context:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - env:
+#          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+#        run: |
+#          echo $EVENT_CONTEXT
 
   send_discord_message:
     runs-on: ubuntu-latest
@@ -92,7 +92,8 @@ jobs:
 
       - name: 다양한 변수를 확인해본다.
         run: |
-          echo ${{github.event.owner.login}}
+          echo ${{github.event.pull_request.user.login}}
+          echo ${{github.event.pull_request.user.id}}
 
 #        with:
 #          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
