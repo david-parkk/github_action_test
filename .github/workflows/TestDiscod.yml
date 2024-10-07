@@ -38,11 +38,11 @@ jobs:
       - name: 상황에 맞는 메세지를 결정한다.
         run: |
           if [ "${{ github.event.action }}" == "opened" ]; then
-              echo "PR_ACTION_MESSAGE=PR 생성되었습니다" >> $GITHUB_ENV
+              echo "PR_ACTION_MESSAGE=:blush: PR 생성되었습니다" >> $GITHUB_ENV
           elif [ "${{ github.event.action }}" == "reopened" ]; then
-              echo "PR_ACTION_MESSAGE=PR 재생성 되었습니다" >> $GITHUB_ENV
+              echo "PR_ACTION_MESSAGE=:blush: PR 재생성 되었습니다" >> $GITHUB_ENV
           elif [ "${{ github.event.action }}" == "synchronize" ]; then
-              echo "PR_ACTION_MESSAGE=기존 PR에 commit 이 추가되었습니다" >> $GITHUB_ENV
+              echo "PR_ACTION_MESSAGE=:blush: 기존 PR에 commit 이 추가되었습니다" >> $GITHUB_ENV
           else
               PR_ACTION_MESSAGE="Unknown action" >> $GITHUB_ENV
           fi
