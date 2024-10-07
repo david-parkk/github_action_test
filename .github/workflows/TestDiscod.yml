@@ -65,12 +65,12 @@ jobs:
                 },
                 {
                   "name": "리뷰어",
-                  "value": ${{github.actor}},
+                  "value": "asdf",
                   "inline": true
                 },
                 {
                   "name": "내용",
-                  "value": ${{github.event.pull_request.title}},
+                  "value": "asdfdsf",
                   
                 }
               ] 
