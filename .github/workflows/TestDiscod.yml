@@ -68,8 +68,8 @@ jobs:
           DISCORD_EMBEDS: '
           [
             { 
-              "url": "${{github.event.pull_request.html_url}}\n\u200B\n",
-              "title": "${{ env.PR_ACTION_MESSAGE }}",
+              "url": "${{github.event.pull_request.html_url}}",
+              "title": "${{ env.PR_ACTION_MESSAGE }}\n\u200B\n",
                
               "fields": [
                 {
