@@ -60,7 +60,7 @@ jobs:
                
               "fields": [
                 {
-                  "name": "authoer",
+                  "name": "한글되나?",
                   "value": "adfasdfd",
                   "inline": true
                 },
