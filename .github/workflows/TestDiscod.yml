@@ -50,7 +50,7 @@ jobs:
           elif [ "${{ github.event.action }}" == "reopened" ]; then
               echo "PR_ACTION_MESSAGE=PR 재생성 되었습니다" >> $GITHUB_ENV
           elif [ "${{ github.event.action }}" == "synchronize" ]; then
-              echo "PR_ACTION_MESSAGE=기존 PR에 추가 commit이 있습니다" >> $GITHUB_ENV
+              echo "PR_ACTION_MESSAGE=기존 PR에 추가 commit 이 있습니다" >> $GITHUB_ENV
           else
               PR_ACTION_MESSAGE="Unknown action" >> $GITHUB_ENV
           fi
@@ -72,8 +72,8 @@ jobs:
                
               "fields": [
                 {
-                  "name": "한글되나?",
-                  "value": "adfasdfd",
+                  "name": "own?",
+                  "value": "<568069533214965760>",
                   "inline": true
                 },
                 {
