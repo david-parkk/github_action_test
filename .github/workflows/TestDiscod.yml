@@ -68,13 +68,13 @@ jobs:
           DISCORD_EMBEDS: '
           [
             { 
-              "url": "${{github.event.pull_request.html_url}}",
+              "url": "${{github.event.pull_request.html_url}}\n\u200B",
               "title": "${{ env.PR_ACTION_MESSAGE }}",
                
               "fields": [
                 {
                   "name": "작업자",
-                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n\u200B\n\u200B\n",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n\u200B\n",
                   "inline": true
                 },
                 {
