@@ -80,7 +80,7 @@ jobs:
               "fields": [
                 {
                   "name": "owner",
-                  "value": "<@ ${{env.DISCORD_USER_ID}}>",
+                  "value": "<${{env.DISCORD_USER_ID}}>",
                   "inline": true
                 },
                 {
