@@ -18,23 +18,23 @@ jobs:
       - run: |
           echo The PR was merge
 
-  print-tag:
-    runs-on: ubuntu-latest
-    #if: ${{ inputs.print_tags }}
-    steps:
-      - name: Print the input tag to STDOUT
-        run: |
-          echo Hello github action
-          echo Hello github action
-        #run: echo  The tags are ${{ inputs.tags }}
-
-  print_context:
-    runs-on: ubuntu-latest
-    steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
+#  print-tag:
+#    runs-on: ubuntu-latest
+#    #if: ${{ inputs.print_tags }}
+#    steps:
+#      - name: Print the input tag to STDOUT
+#        run: |
+#          echo Hello github action
+#          echo Hello github action
+#        #run: echo  The tags are ${{ inputs.tags }}
+#
+#  print_context:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - env:
+#          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+#        run: |
+#          echo $EVENT_CONTEXT
 
   send_discord_message:
     runs-on: ubuntu-latest
@@ -51,12 +51,7 @@ jobs:
           DISCORD_USERNAME: 아워메뉴봇
           #DISCORD_AVATAR: something
           #DISCORD_EMBEDS: something
-          DISCORD_EMBEDS: '[{
-                "title": "PR이 게시되었습니다",
-                "description": "The project something has been successfully deployed.",
-                "color": 3066993, # Green color
-              }
-            ]'
+          DISCORD_EMBEDS: '[{ "title":"${{github.event.head_commit.message}}", "footer":{"text":"Pushed by ${{github.event.head_commit.author.name}}"} }]'
       - name: echo
         run: |
           echo ${{github.event_name}}
