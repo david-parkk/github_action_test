@@ -43,12 +43,24 @@ jobs:
 #        run: echo "$GITHUB_CONTEXT"
 #        env:
 #          GITHUB_CONTEXT: ${{ toJson(github) }}
+      - name: Set and Use Variable in Same Step
+        run: |
+          if [ "${{ github.event.action }}" == "opened" ]; then
+            echo "PR_ACTION_MESSAGE=PR 생성되었습니다" >> $GITHUB_ENV
+          elif [ "${{ github.event.action }}" == "reopened" ]; then
+            echo "PR_ACTION_MESSAGE=PR 재생성 되었습니다" >> $GITHUB_ENV
+          elif [ "${{ github.event.action }}" == "closed" ]; then
+            echo "PR_ACTION_MESSAGE=PR closed 되었습니다" >> $GITHUB_ENV
+          elif [ "${{ github.event.action }}" == "synchronize" ]; then
+            echo "PR_ACTION_MESSAGE=기존 PR에 추가 commit이 있습니다" >> $GITHUB_ENV
+          else
+            PR_ACTION_MESSAGE="Unknown action" >> $GITHUB_ENV
 
       - name: Actions for Discord
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_USERNAME: 봇
+          DISCORD_USERNAME: 아워메뉴봇
           DISCORD_AVATAR: "https://github.com/user-attachments/assets/2f3e5833-4c1c-4001-b32c-7c64e5b9f15d"
           #"footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"}
 #          "author": { "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
@@ -58,7 +70,7 @@ jobs:
           [
             { 
               "url": "${{github.event.pull_request.html_url}}",
-              "title": "리뷰할 PR 있습니다~(같이 사용되나?)",
+              "title": "${{ env.PR_ACTION_MESSAGE }}",
                
               "fields": [
                 {
