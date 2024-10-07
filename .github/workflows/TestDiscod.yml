@@ -90,9 +90,9 @@ jobs:
             }
           ]'
 
-      - name: echo
+      - name: 다양한 변수를 확인해본다.
         run: |
-          echo ${{github.event_name}}
+          echo ${{github.event.pull_request.owner.login}}
 
 #        with:
 #          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
