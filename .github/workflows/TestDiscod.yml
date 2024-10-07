@@ -78,7 +78,7 @@ jobs:
                 },
                 {
                   "name": "reviewer",
-                  "value": "asdf",
+                  "value": "<@373383545873235970>",
                   "inline": true
                 },
                 {
