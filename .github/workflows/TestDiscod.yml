@@ -39,10 +39,14 @@ jobs:
   send_discord_message:
     runs-on: ubuntu-latest
     steps:
-      - name: Discord notification
+      - name: Actions for Discord
+        uses: Ilshidur/action-discord@0.3.2
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@master
+          DISCORD_USERNAME: discord_bot
+          #DISCORD_AVATAR: something
+          #DISCORD_EMBEDS: something
+
         with:
           args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
