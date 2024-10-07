@@ -61,7 +61,7 @@ jobs:
               "fields":[
                 {
                   "name": "작성자",
-                  "value": "adfasdfd,
+                  "value": "adfasdfd",
                   "inline": true
                 },
                 {
