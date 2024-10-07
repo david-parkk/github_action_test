@@ -74,7 +74,7 @@ jobs:
               "fields": [
                 {
                   "name": "작업자",
-                  "value": "${{env.DISCORD_OWNER_ID}}\n\n\n\n",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n\n- - -\n\n"
                   "inline": true
                 },
                 {
