@@ -51,7 +51,13 @@ jobs:
           DISCORD_USERNAME: 아워메뉴봇
           DISCORD_AVATAR:
           #DISCORD_EMBEDS: something
-          DISCORD_EMBEDS: '[{ "title":"${{github.event.head_commit.message}}", "footer":{"text":"Pushed by ${{github.event.number}}"} }]'
+          DISCORD_EMBEDS: '
+          [
+            { 
+              "title":"${{github.event.head_commit.message}}", 
+              "footer":{"text":"Pushed by ${{github.event.number}}"} 
+            }
+          ]'
       - name: echo
         run: |
           echo ${{github.event_name}}
