@@ -48,7 +48,7 @@ jobs:
           #DISCORD_EMBEDS: something
           DISCORD_EMBEDS: '[{
                 "title": "PR이 게시되었습니다",
-                "description": "The project ${{ EVENT_PAYLOAD.repository.full_name }} has been successfully deployed.",
+                "description": "The project something has been successfully deployed.",
                 "color": 3066993, # Green color
               }
             ]'
