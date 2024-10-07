@@ -52,6 +52,8 @@ jobs:
           DISCORD_EMBEDS: '
           [
             { 
+              "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+              "url": "${{github.event.pull_request.html_url}}",
               "title":"${{github.event.head_commit.message}}", 
               "footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"} 
             }
