@@ -84,7 +84,7 @@ jobs:
                 },
                 {
                   "name": "내용",
-                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }}) \n\u200B"
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
                   
                 }
               ] 
