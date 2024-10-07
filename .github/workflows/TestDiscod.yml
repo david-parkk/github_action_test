@@ -39,6 +39,11 @@ jobs:
   send_discord_message:
     runs-on: ubuntu-latest
     steps:
+      - name: Show GitHub context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
       - name: Actions for Discord
         uses: Ilshidur/action-discord@master
         env:
