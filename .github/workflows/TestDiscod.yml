@@ -46,7 +46,31 @@ jobs:
           DISCORD_USERNAME: 아워메뉴봇
           #DISCORD_AVATAR: something
           #DISCORD_EMBEDS: something
-
-        with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+          DISCORD_EMBEDS: |
+            [{
+              "title": "Project Deployed",
+              "description": "The project **{{ EVENT_PAYLOAD.repository.full_name }}** has been successfully deployed.",
+              "color": 3066993, # Green color
+              "fields": [
+                {
+                  "name": "Repository",
+                  "value": "{{ EVENT_PAYLOAD.repository.full_name }}",
+                  "inline": true
+                },
+                {
+                  "name": "Commit",
+                  "value": "{{ EVENT_PAYLOAD.head_commit.message }}",
+                  "inline": true
+                }
+              ],
+              "footer": {
+                "text": "Deployment Bot",
+                "icon_url": "https://example.com/bot-icon.png" # Optional: replace with actual icon URL
+              },
+              "timestamp": "{{ now }}"
+            }]
+            with:
+            args: ''
+#        with:
+#          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
