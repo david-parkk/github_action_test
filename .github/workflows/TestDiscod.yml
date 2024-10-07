@@ -49,6 +49,8 @@ jobs:
               echo "PR_ACTION_MESSAGE=PR 생성되었습니다" >> $GITHUB_ENV
           elif [ "${{ github.event.action }}" == "reopened" ]; then
               echo "PR_ACTION_MESSAGE=PR 재생성 되었습니다" >> $GITHUB_ENV
+          elif [ "${{ github.event.action }}" == "synchronize" ]; then
+              echo "PR_ACTION_MESSAGE=기존 PR에 commit 이 추가되었습니다" >> $GITHUB_ENV
           else
               PR_ACTION_MESSAGE="Unknown action" >> $GITHUB_ENV
           fi
