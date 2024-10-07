@@ -39,25 +39,27 @@ jobs:
   send_discord_message:
     runs-on: ubuntu-latest
     steps:
-      - name: Show GitHub context
-        run: echo "$GITHUB_CONTEXT"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+#      - name: Show GitHub context
+#        run: echo "$GITHUB_CONTEXT"
+#        env:
+#          GITHUB_CONTEXT: ${{ toJson(github) }}
 
       - name: Actions for Discord
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_USERNAME: 아워메뉴봇
+          #"footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"}
           DISCORD_EMBEDS: '
           [
             { 
               "author": {  "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
               "url": "${{github.event.pull_request.html_url}}",
-              "title":"${{github.event.head_commit.message}}", 
-              "footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"} 
+              "title": "PR 있습니다~" 
+               
             }
           ]'
+
       - name: echo
         run: |
           echo ${{github.event_name}}
