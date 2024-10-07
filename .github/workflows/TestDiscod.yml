@@ -69,7 +69,7 @@ jobs:
           [
             { 
               "url": "${{github.event.pull_request.html_url}}",
-              "title": "${{ env.PR_ACTION_MESSAGE }}\n\u200B\n",
+              "title": "${{ env.PR_ACTION_MESSAGE }}\n\u200B",
                
               "fields": [
                 {
@@ -84,7 +84,7 @@ jobs:
                 },
                 {
                   "name": "내용",
-                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }}) \n\u200B\n"
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }}) \n\u200B"
                   
                 }
               ] 
