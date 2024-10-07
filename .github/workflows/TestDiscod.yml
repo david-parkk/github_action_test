@@ -67,7 +67,7 @@ jobs:
           DISCORD_EMBEDS: '
           [
             { 
-              "url": "${{github.event.pull_request.html_url}} 리뷰가 필요합니다",
+              "url": "${{github.event.pull_request.html_url}} ~~",
               "title": "${{ env.PR_ACTION_MESSAGE }}",
                
               "fields": [
