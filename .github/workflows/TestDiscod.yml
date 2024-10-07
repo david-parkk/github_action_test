@@ -45,13 +45,13 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
       - name: Actions for Discord
-        uses: Ilshidur/action-discord@0.3.2
+        uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_USERNAME: 아워메뉴봇
-          #DISCORD_AVATAR: something
+          DISCORD_AVATAR:
           #DISCORD_EMBEDS: something
-          DISCORD_EMBEDS: '[{ "title":"${{github.event.head_commit.message}}", "footer":{"text":"Pushed by ${{github.event.head_commit.author.name}}"} }]'
+          DISCORD_EMBEDS: '[{ "title":"${{github.event.head_commit.message}}", "footer":{"text":"Pushed by ${{github.event.number}}"} }]'
       - name: echo
         run: |
           echo ${{github.event_name}}
