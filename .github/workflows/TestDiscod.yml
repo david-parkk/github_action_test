@@ -56,25 +56,26 @@ jobs:
           DISCORD_EMBEDS: '
           [
             { 
-              
-               
-              "fields":[
-                {
-                  "name": "작성자",
-                  "value": "adfasdfd",
-                  "inline": true
-                },
-                {
-                  "name": "리뷰어",
-                  "value": "asdf",
-                  "inline": true
-                },
-                {
-                  "name": "내용",
-                  "value": "asdfdsf",
-                  
-                }
-              ] 
+               "fields": [
+                  {
+                    "name": "Cat",
+                    "value": "Hi! :wave:",
+                    "inline": true
+                  },
+                  {
+                    "name": "Dog",
+                    "value": "hello!",
+                    "inline": true
+                  },
+                  {
+                    "name": "Cat",
+                    "value": "wanna play? join to voice channel!"
+                  },
+                  {
+                    "name": "Dog",
+                    "value": "yay"
+                  }
+                ]
             }
           ]'
 
