@@ -60,7 +60,7 @@ jobs:
               "fields":[
                 {
                   "name": "작성자",
-                  "value": ${{github.actor}},
+                  "value": "adfasdfd,
                   "inline": true
                 },
                 {
