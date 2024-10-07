@@ -69,8 +69,8 @@ jobs:
               },
               "timestamp": "{{ now }}"
             }]
-          with:
-            args: ''
+        with:
+          args: ''
 #        with:
 #          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
