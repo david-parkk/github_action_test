@@ -43,7 +43,7 @@ jobs:
         uses: Ilshidur/action-discord@0.3.2
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_USERNAME: discord_bot
+          DISCORD_USERNAME: 아워메뉴봇
           #DISCORD_AVATAR: something
           #DISCORD_EMBEDS: something
 
