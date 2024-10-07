@@ -68,7 +68,7 @@ jobs:
           DISCORD_EMBEDS: '
           [
             { 
-              "url": "${{github.event.pull_request.html_url}}\n\u200B",
+              "url": "${{github.event.pull_request.html_url}}\n\u200B\n",
               "title": "${{ env.PR_ACTION_MESSAGE }}",
                
               "fields": [
@@ -84,7 +84,7 @@ jobs:
                 },
                 {
                   "name": "내용",
-                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }}) \n\u200B\n"
                   
                 }
               ] 
