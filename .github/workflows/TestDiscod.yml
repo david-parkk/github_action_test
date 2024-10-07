@@ -18,35 +18,72 @@ jobs:
       - run: |
           echo The PR was merge
 
-  print-tag:
-    runs-on: ubuntu-latest
-    #if: ${{ inputs.print_tags }}
-    steps:
-      - name: Print the input tag to STDOUT
-        run: |
-          echo Hello github action
-          echo Hello github action
-        #run: echo  The tags are ${{ inputs.tags }}
+#  print-tag:
+#    runs-on: ubuntu-latest
+#    #if: ${{ inputs.print_tags }}
+#    steps:
+#      - name: Print the input tag to STDOUT
+#        run: |
+#          echo Hello github action
+#          echo Hello github action
+#        #run: echo  The tags are ${{ inputs.tags }}
+#
+#  print_context:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - env:
+#          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+#        run: |
+#          echo $EVENT_CONTEXT
 
-  print_context:
+  send_discord_message:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-        run: |
-          echo $EVENT_CONTEXT
-          
+#      - name: Show GitHub context
+#        run: echo "$GITHUB_CONTEXT"
+#        env:
+#          GITHUB_CONTEXT: ${{ toJson(github) }}
 
-  triage:
-    if: >-
-      github.event.pull_request.user.login != 'octobot' &&
-      github.event.pull_request.user.login != 'dependabot[bot]'
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Comment about changes we can't accept"
+      - name: Actions for Discord
+        uses: Ilshidur/action-discord@master
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR: ${{ github.event.pull_request.html_url }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: 아워메뉴봇
+          #DISCORD_AVATAR:
+          #"footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"}
+#          "author": { "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
+#                      "url": "${{github.event.pull_request.html_url}}",
+#                      "title": "리뷰할 PR 있습니다~"
+          DISCORD_EMBEDS: '
+          [
+            { 
+              "url": "${{github.event.pull_request.html_url}}",
+              "title": "리뷰할 PR 있습니다~(같이 사용되나?)",
+               
+              "fields": [
+                {
+                  "name": "한글되나?",
+                  "value": "adfasdfd",
+                  "inline": true
+                },
+                {
+                  "name": "reviewer",
+                  "value": "asdf",
+                  "inline": true
+                },
+                {
+                  "name": "content",
+                  "value": "asdfdsf"
+                  
+                }
+              ] 
+            }
+          ]'
+
+      - name: echo
         run: |
-          gh pr edit $PR --add-label 'invalid'
-          gh pr comment $PR --body 'It looks like you edited `package*.json`, `.github/CODEOWNERS`, or `.github/workflows/**`. We do not allow contributions to these files. Please review our [contributing guidelines](https://github.com/octo-org/octo-repo/blob/main/CONTRIBUTING.md) for what contributions are accepted.'
+          echo ${{github.event_name}}
+
+#        with:
+#          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
+
