@@ -8,6 +8,7 @@ on:
     types:
       - opened
       - reopened
+      - closed
       - synchronize
 jobs:
   if_merged:
