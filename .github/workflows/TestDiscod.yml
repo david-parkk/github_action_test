@@ -46,8 +46,7 @@ jobs:
           DISCORD_USERNAME: 아워메뉴봇
           #DISCORD_AVATAR: something
           #DISCORD_EMBEDS: something
-          DISCORD_EMBEDS:
-            `[
+          DISCORD_EMBEDS: `[
               {
                 "title": "PR이 게시되었습니다",
                 "description": "The project ${{ EVENT_PAYLOAD.repository.full_name }} has been successfully deployed.",
