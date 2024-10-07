@@ -1,10 +1,10 @@
 name: discord message
 
 on:
-  push:
+  #push:
   pull_request:
     branches:
-      -develop
+      - 'develop'
     types:
       - opened
 #    inputs:
@@ -36,7 +36,9 @@ jobs:
     #if: ${{ inputs.print_tags }}
     steps:
       - name: Print the input tag to STDOUT
-        run: echo Hello github action
+        run: |
+          echo Hello github action
+          echo Hello github action
         #run: echo  The tags are ${{ inputs.tags }}
 
   print_context:
