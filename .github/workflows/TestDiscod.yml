@@ -131,6 +131,7 @@ jobs:
           echo ${{github.event.pull_request.user.id}}
 
   send_failure_message:
+    needs: build
     runs-on: ubuntu-latest
     if: failure()
     steps:
