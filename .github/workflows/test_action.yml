@@ -12,11 +12,7 @@ on:
 permissions:
   actions: write  # 워크플로우 트리거 권한 설정
 
-#동시성 환경을 해결한다
-concurrency:
 
-  group: ${{ github.ref }} # 동일한 PR에 대한 식별자
-  cancel-in-progress: true
 
 jobs:
   test:
