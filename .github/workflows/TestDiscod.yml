@@ -64,6 +64,10 @@ jobs:
         with:
           junit_files: '**/build/test-results/test/TEST-*.xml'
 
+      - name: 실패시 공지한다.
+        uses: actions/github-script@v5
+        run: echo failed!
+        if: failure()
 
   send_discord_message:
     needs: build
