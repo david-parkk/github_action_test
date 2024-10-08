@@ -49,7 +49,7 @@ jobs:
                 },
                 {
                   "name": "코멘트 내용",
-                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.comment.body }})"
+                  "value": "${{ github.event.comment.body }}"
   
                 }
               ] 
