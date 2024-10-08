@@ -3,7 +3,7 @@ name: action by other action
 on:
   workflow_run:
     workflows: ["CI and sent Discord message"]
-    types: [completed]
+
 
 jobs:
 
