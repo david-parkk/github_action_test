@@ -161,7 +161,7 @@ jobs:
                   "name": "작업자",
                   "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n\u200B\n",
                   "inline": true
-                },
+                }
               ] 
             }
           ]'
