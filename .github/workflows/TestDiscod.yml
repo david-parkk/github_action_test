@@ -73,11 +73,11 @@ jobs:
 
   send_discord_message:
     needs: build
+    if: always()
     runs-on: ubuntu-latest
     steps:
 
       - name: 상황에 맞는 메세지를 결정한다.
-        if: always()
         run: |
           if [ "${{ github.event.action }}" == "opened" ]; then
               echo "PR_ACTION_MESSAGE=:blush: PR 생성되었습니다" >> $GITHUB_ENV
@@ -95,7 +95,8 @@ jobs:
               echo "DISCORD_OWNER_ID=<@373383545873235970>" >> $GITHUB_ENV
               echo "DISCORD_REVIEWER_ID=<@568069533214965760>" >> $GITHUB_ENV
           fi
-      - name: Discord 메세지를 보낸다
+
+      - name: 성공시 Discord 메세지를 보낸다
         if: ${{ needs.build.result == 'success' }}
         uses: Ilshidur/action-discord@master
         env:
