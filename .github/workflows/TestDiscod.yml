@@ -9,6 +9,11 @@ on:
       - reopened
       - synchronize
 
+#동시성 환경을 해결한다
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,6 +32,7 @@ jobs:
           --health-interval=10s
           --health-timeout=5s
           --health-retries=3
+          
 
     steps:
       - uses: actions/checkout@v4
@@ -59,6 +65,7 @@ jobs:
 
 
   send_discord_message:
+    needs: build
     runs-on: ubuntu-latest
     steps:
 
