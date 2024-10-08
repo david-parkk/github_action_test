@@ -11,6 +11,15 @@ jobs:
   send_discord_message:
     runs-on: ubuntu-latest
     steps:
+      - name: 작업자와 리뷰어를 결정한다.
+        run: |
+          if [ "${{ github.actor }}" == "david-parkk" ]; then
+              echo "DISCORD_OWNER_ID=<@568069533214965760>" >> $GITHUB_ENV
+              echo "DISCORD_REVIEWER_ID=<@373383545873235970>" >> $GITHUB_ENV
+          else
+              echo "DISCORD_OWNER_ID=<@373383545873235970>" >> $GITHUB_ENV
+              echo "DISCORD_REVIEWER_ID=<@568069533214965760>" >> $GITHUB_ENV
+          fi
       - name: 리뷰 요청 Discord 메세지를 보낸다
         uses: Ilshidur/action-discord@master
         env:
