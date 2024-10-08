@@ -15,6 +15,9 @@ concurrency:
   group: ${{ github.ref }} # 동일한 PR에 대한 식별자
   cancel-in-progress: true
 
+# 환경변수를 설정한다.defaults:
+env:
+  PR_ACTION_MESSAGE: "기본 메세지"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -124,27 +127,8 @@ jobs:
               ] 
             }
           ]'
-
-      - name: 다양한 변수를 확인해본다.
-        run: |
-          echo ${{github.event.pull_request.user.login}}
-          echo ${{github.event.pull_request.user.id}}
-
-  send_failure_message:
-    needs: build
-    runs-on: ubuntu-latest
-    if: failure()
-    steps:
-      - name: 작업자와 리뷰어를 결정한다.
-        run: |
-          if [ "${{ github.actor }}" == "david-parkk" ]; then
-              echo "DISCORD_OWNER_ID=<@568069533214965760>" >> $GITHUB_ENV
-              echo "DISCORD_REVIEWER_ID=<@373383545873235970>" >> $GITHUB_ENV
-          else
-              echo "DISCORD_OWNER_ID=<@373383545873235970>" >> $GITHUB_ENV
-              echo "DISCORD_REVIEWER_ID=<@568069533214965760>" >> $GITHUB_ENV
-          fi
-      - name: Discord 메세지를 보낸다
+      - name: 실패시 실패 메세지를 보낸다
+        if: failure()
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
@@ -159,10 +143,16 @@ jobs:
               "fields": [
                 {
                   "name": "작업자",
-                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n\u200B\n",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n",
                   "inline": true
                 }
               ] 
             }
           ]'
+      - name: 다양한 변수를 확인해본다.
+        run: |
+          echo ${{github.event.pull_request.user.login}}
+          echo ${{github.event.pull_request.user.id}}
+
+
 
