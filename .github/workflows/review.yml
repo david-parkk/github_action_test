@@ -37,14 +37,14 @@ jobs:
           [
             { 
               "url": "${{github.event.pull_request.html_url}}",
-              "title": ":musical_note: 리뷰 코멘트가 생성되었습니다. 확인해주세요",
+              "title": ":musical_note: 리뷰 코멘트가 생성되었습니다.",
   
               "fields": [
                 
                 
                 {
                   "name": "PR 주인",
-                  "value": "${{env.PR_OWNER}}\n\u200B\n\u200B\n",
+                  "value": "${{env.PR_OWNER}}",
                   "inline": true
                 },
                 {
