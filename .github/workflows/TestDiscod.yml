@@ -60,6 +60,7 @@ jobs:
 
 
   send_discord_message:
+    needs: build
     runs-on: ubuntu-latest
     steps:
 
