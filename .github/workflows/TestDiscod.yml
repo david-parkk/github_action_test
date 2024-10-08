@@ -154,7 +154,7 @@ jobs:
           [
             { 
               "url": "${{github.event.pull_request.html_url}}",
-              "title": "테스트에 실패했습니다. 다시 확인해주세요 ",
+              "title": ":sob: 테스트에 실패했습니다. 다시 확인해주세요 ",
 
               "fields": [
                 {
