@@ -146,6 +146,11 @@ jobs:
                   "name": "작업자",
                   "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n",
                   "inline": true
+                },
+                {
+                  "name": "내용",
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
+                  
                 }
               ] 
             }

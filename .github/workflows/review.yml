@@ -2,3 +2,18 @@ name: review and sent Discord message
 
 on:
   pull_request_review:
+    types: [ submitted ]  # 리뷰가 제출될 때
+  pull_request_review_comment:
+    types: [ created ]  # 리뷰 코멘트가 생성될 때
+
+
+jobs:
+  handle_pr_review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 리뷰와 코멘트 처리
+        run: |
+          echo "리뷰가 제출되었습니다!"
+          echo "리뷰의 상태는: ${{ github.event.review.state }}"
+          echo "리뷰어: ${{ github.event.review.user.login }}"
+          echo "리뷰 코멘트 내용: ${{ github.event.comment.body }}"
