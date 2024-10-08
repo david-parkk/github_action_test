@@ -8,9 +8,44 @@ on:
 
 
 jobs:
-  handle_pr_review:
+  send_discord_message:
     runs-on: ubuntu-latest
     steps:
+      - name: 리뷰 요청 Discord 메세지를 보낸다
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: 개발진스
+          DISCORD_AVATAR: "https://github.com/user-attachments/assets/1ff8e3ad-40c1-4a99-85cf-367376ed5d93"
+          DISCORD_EMBEDS: '
+          [
+            { 
+              "url": "${{github.event.pull_request.html_url}}",
+              "title": ":musical_note: 리뷰 코멘트가 생성되었습니다. 확인해주세요",
+  
+              "fields": [
+                
+                {
+                  "name": "리뷰어",
+                  "value": "${{env.DISCORD_REVIEWER_ID}}\n",
+                  "inline": true
+                },
+                {
+                  "name": " ",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n\u200B\n",
+                  "inline": true
+                },
+                {
+                  "name": "내용",
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
+  
+                }
+              ] 
+            }
+          ]'
+
+
+
       - name: 리뷰와 코멘트 처리
         run: |
           echo "리뷰가 제출되었습니다!"
