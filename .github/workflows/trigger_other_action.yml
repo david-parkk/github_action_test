@@ -3,14 +3,16 @@ name: action by other action
 on:
   workflow_run:
     workflows: ["CI and sent Discord message"]
-
+    types: [completed]
 
 jobs:
-
-  send_message:
+  on-success:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-    - name: 다양한 변수를 확인해본다.
-      run: |
-        echo hello
-        echo ${{github.event.pull_request.user.id}}
+      - run: echo 'The triggering workflow passed'
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - run: echo 'The triggering workflow failed'
