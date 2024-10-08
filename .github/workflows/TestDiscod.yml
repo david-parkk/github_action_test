@@ -1,69 +1,43 @@
-name: discord message
+name: PR request Discord Message
 
 on:
-  #push:
   pull_request:
     branches:
       - 'develop'
     types:
       - opened
       - reopened
-      - closed
       - synchronize
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo The PR was merge
-
-#  print-tag:
-#    runs-on: ubuntu-latest
-#    #if: ${{ inputs.print_tags }}
-#    steps:
-#      - name: Print the input tag to STDOUT
-#        run: |
-#          echo Hello github action
-#          echo Hello github action
-#        #run: echo  The tags are ${{ inputs.tags }}
-#
-#  print_context:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - env:
-#          EVENT_CONTEXT: ${{ toJSON(github.event) }}
-#        run: |
-#          echo $EVENT_CONTEXT
 
   send_discord_message:
     runs-on: ubuntu-latest
     steps:
-#      - name: Show GitHub context
-#        run: echo "$GITHUB_CONTEXT"
-#        env:
-#          GITHUB_CONTEXT: ${{ toJson(github) }}
-      - name: Set and Use Variable in Same Step
+
+      - name: 상황에 맞는 메세지를 결정한다.
         run: |
           if [ "${{ github.event.action }}" == "opened" ]; then
-              echo "PR_ACTION_MESSAGE=PR 생성되었습니다" >> $GITHUB_ENV
+              echo "PR_ACTION_MESSAGE=:blush: PR 생성되었습니다" >> $GITHUB_ENV
           elif [ "${{ github.event.action }}" == "reopened" ]; then
-              echo "PR_ACTION_MESSAGE=PR 재생성 되었습니다" >> $GITHUB_ENV
+              echo "PR_ACTION_MESSAGE=:blush: PR 재생성 되었습니다" >> $GITHUB_ENV
           elif [ "${{ github.event.action }}" == "synchronize" ]; then
-              echo "PR_ACTION_MESSAGE=기존 PR에 추가 commit이 있습니다" >> $GITHUB_ENV
+              echo "PR_ACTION_MESSAGE=:blush: 기존 PR에 commit 이 추가되었습니다" >> $GITHUB_ENV
+          fi
+      - name: 작업자와 리뷰어를 결정한다.
+        run: |
+          if [ "${{ github.actor }}" == "david-parkk" ]; then
+              echo "DISCORD_OWNER_ID=<@568069533214965760>" >> $GITHUB_ENV
+              echo "DISCORD_REVIEWER_ID=<@373383545873235970>" >> $GITHUB_ENV
           else
-              PR_ACTION_MESSAGE="Unknown action" >> $GITHUB_ENV
+              echo "DISCORD_OWNER_ID=<@373383545873235970>" >> $GITHUB_ENV
+              echo "DISCORD_REVIEWER_ID=<@568069533214965760>" >> $GITHUB_ENV
           fi
       - name: Actions for Discord
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_USERNAME: 아워메뉴봇
-          DISCORD_AVATAR: "https://github.com/user-attachments/assets/2f3e5833-4c1c-4001-b32c-7c64e5b9f15d"
-          #"footer":{"text":"Pushed by ${{github.event.number}},  주소 ${{ github.event.pull_request.html_url }} 제목 ${{ github.event.pull_request.title }}"}
-#          "author": { "icon_url": "https://avatars.githubusercontent.com/${{ github.actor }}", "name": "${{ github.actor }}", "url": "https://github.com/${{github.actor}}" },
-#                      "url": "${{github.event.pull_request.html_url}}",
-#                      "title": "리뷰할 PR 있습니다~"
+          DISCORD_USERNAME: 개발진스
+          DISCORD_AVATAR: "https://github.com/user-attachments/assets/1ff8e3ad-40c1-4a99-85cf-367376ed5d93"
           DISCORD_EMBEDS: '
           [
             { 
@@ -72,28 +46,27 @@ jobs:
                
               "fields": [
                 {
-                  "name": "한글되나?",
-                  "value": "adfasdfd",
+                  "name": "작업자",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n\u200B\n",
                   "inline": true
                 },
                 {
-                  "name": "reviewer",
-                  "value": "asdf",
+                  "name": "리뷰어",
+                  "value": "${{env.DISCORD_REVIEWER_ID}}\n",
                   "inline": true
                 },
                 {
-                  "name": "content",
-                  "value": "asdfdsf"
+                  "name": "내용",
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
                   
                 }
               ] 
             }
           ]'
 
-      - name: echo
+      - name: 다양한 변수를 확인해본다.
         run: |
-          echo ${{github.event_name}}
+          echo ${{github.event.pull_request.user.login}}
+          echo ${{github.event.pull_request.user.id}}
 
-#        with:
-#          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
 
