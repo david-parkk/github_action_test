@@ -130,4 +130,29 @@ jobs:
           echo ${{github.event.pull_request.user.login}}
           echo ${{github.event.pull_request.user.id}}
 
+  send_failure_message:
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: Discord 메세지를 보낸다
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: 개발진스
+          DISCORD_AVATAR: "https://github.com/user-attachments/assets/1ff8e3ad-40c1-4a99-85cf-367376ed5d93"
+          DISCORD_EMBEDS: '
+          [
+            { 
+              "url": "${{github.event.pull_request.html_url}}",
+              "title": "테스트에 실패했습니다. 다시 확인해주세요 ",
+
+              "fields": [
+                {
+                  "name": "작업자",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n\u200B\n",
+                  "inline": true
+                },
+              ] 
+            }
+          ]'
 
