@@ -1,0 +1,17 @@
+name: test
+
+on:
+  pull_request:
+    branches:
+      - 'develop'
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo 'The triggering workflow passed'
