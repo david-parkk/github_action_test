@@ -18,21 +18,17 @@ jobs:
     steps:
       - name: 작업자와 리뷰어를 결정한다.
         run: |
-          echo ${{ github.event.pull_request.user.login }}
-            
           if [ "${{ github.event.pull_request.user.login }}" == "david-parkk" ]; then
               echo "PR_OWNER=<@568069533214965760>" >> $GITHUB_ENV
-              
           else
               echo "PR_OWNER=<@373383545873235970>" >> $GITHUB_ENV
-              
           fi
       - name: 리뷰 요청 Discord 메세지를 보낸다
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_USERNAME: 개발진스
-          DISCORD_AVATAR: "https://github.com/user-attachments/assets/1ff8e3ad-40c1-4a99-85cf-367376ed5d93"
+          DISCORD_AVATAR: "https://github.com/user-attachments/assets/461da75e-e3a2-45ea-a769-5ca2a5d07c6c"
           DISCORD_EMBEDS: '
           [
             { 
