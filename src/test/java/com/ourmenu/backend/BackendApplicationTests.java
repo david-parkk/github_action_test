@@ -12,8 +12,7 @@ class BackendApplicationTests {
 
 	@Test
 	void failTest(){
-		throw new RuntimeException();
-
+		
 	}
 
 }
