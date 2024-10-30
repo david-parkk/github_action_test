@@ -2,6 +2,6 @@
 
 git add .
 git commit -m "test"
-git push origin test1
+git push origin main
 #
 #./.github/script.sh
