@@ -11,8 +11,10 @@ on:
 
 #동시성 환경을 해결한다
 concurrency:
-  group: ${{ github.ref }}
+
+  group: ${{ github.ref }} # 동일한 PR에 대한 식별자
   cancel-in-progress: true
+
 
 jobs:
   build:
@@ -45,6 +47,16 @@ jobs:
       - name: gradlew 의 root 실행권한을 부여한다.
         run: chmod +x gradlew
 
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
       - name: Gradle 를 준비한다.
         uses: gradle/actions/setup-gradle@417ae3ccd767c252f5661f1ace9f835f9654f2b5 # v3.1.0
 
@@ -63,9 +75,15 @@ jobs:
         with:
           junit_files: '**/build/test-results/test/TEST-*.xml'
 
+      - name: 실패시 공지한다.
+        if: failure()
+        run: |
+          echo failed!
+        
 
   send_discord_message:
     needs: build
+    if: always()
     runs-on: ubuntu-latest
     steps:
 
@@ -87,12 +105,14 @@ jobs:
               echo "DISCORD_OWNER_ID=<@373383545873235970>" >> $GITHUB_ENV
               echo "DISCORD_REVIEWER_ID=<@568069533214965760>" >> $GITHUB_ENV
           fi
-      - name: Discord 메세지를 보낸다
+
+      - name: 성공시 Discord 메세지를 보낸다
+        if: ${{ needs.build.result == 'success' }}
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_USERNAME: 개발진스
-          DISCORD_AVATAR: "https://github.com/user-attachments/assets/1ff8e3ad-40c1-4a99-85cf-367376ed5d93"
+          DISCORD_AVATAR: "https://github.com/user-attachments/assets/461da75e-e3a2-45ea-a769-5ca2a5d07c6c"
           DISCORD_EMBEDS: '
           [
             { 
@@ -118,10 +138,37 @@ jobs:
               ] 
             }
           ]'
+      - name: 실패시 실패 메세지를 보낸다
+        if: ${{ needs.build.result == 'failure' }}
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: 개발진스
+          DISCORD_AVATAR: "https://github.com/user-attachments/assets/461da75e-e3a2-45ea-a769-5ca2a5d07c6c"
+          DISCORD_EMBEDS: '
+          [
+            { 
+              "url": "${{github.event.pull_request.html_url}}",
+              "title": ":sob: 테스트에 실패했습니다. 다시 확인해주세요 ",
 
+              "fields": [
+                {
+                  "name": "작업자",
+                  "value": "${{env.DISCORD_OWNER_ID}}\n\u200B\n",
+                  "inline": true
+                },
+                {
+                  "name": "내용",
+                  "value": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})"
+                  
+                }
+              ] 
+            }
+          ]'
       - name: 다양한 변수를 확인해본다.
         run: |
           echo ${{github.event.pull_request.user.login}}
           echo ${{github.event.pull_request.user.id}}
+
 
 
