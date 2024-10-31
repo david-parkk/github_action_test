@@ -29,6 +29,9 @@ jobs:
         with:
           template-path: .github/ISSUE_TEMPLATE/issue-form.yml
 
+      - name: cat parse result
+        run: cat ${HOME}/issue-parser-result.json
+
       - name: Log Issue Parser
         run: |
           echo "issueparser_parentKey: ${{ steps.issue-parser.outputs.issueparser_parentKey }}"
