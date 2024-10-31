@@ -84,5 +84,5 @@ jobs:
           issue-number: ${{ github.event.issue.number }}
           body:  |
             Jira Issue Created: [${{ steps.create.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create.outputs.issue }})
-            - Branch Name: ${BRANCH_NAME}
+            - Branch Name: ${env.BRANCH_NAME}
       
