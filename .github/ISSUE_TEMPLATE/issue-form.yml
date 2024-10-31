@@ -17,7 +17,7 @@ body:
     attributes:
       label: '✅ 작업내용'
       description: '작업할 내용에 대해 작성하세요'
-      value: 'ex) API를 개발한다'
+      value: 'ex) API를 개발한다 '
     validations:
       required: true
 
