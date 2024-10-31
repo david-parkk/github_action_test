@@ -34,7 +34,6 @@ jobs:
 
       - name: Log Issue Parser
         run: |
-          echo "issueparser_parentKey: ${{ steps.issue-parser.outputs.issueparser_parentKey }}"
           echo "__ticket_number: ${{ steps.issue-parser.outputs.__ticket_number }}"
           echo "jsonString:  ${{ steps.issue-parser.outputs.jsonString }}"
 
