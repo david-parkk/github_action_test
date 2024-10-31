@@ -40,14 +40,12 @@ jobs:
         id: md2jira
         with:
           input-text: |
-            ### Github Issue Link
-            - ${{ github.event.issue.html_url }}
-
             ${{ github.event.issue.body }}
+            
+            ### Github URL
+            - ${{ github.event.issue.html_url }}
           mode: md2jira
-      - name: Echo Parent Key
-        run: |
-          echo "Parent Key: ${{ steps.issue-parser.outputs.issueparser_parentKey }}"
+
       - name: Create Issue
         id: create
         uses: atlassian/gajira-create@v3
@@ -58,7 +56,7 @@ jobs:
           description: '${{ steps.md2jira.outputs.output-text }}'
 
       - name: Log created issue
-        run: echo "Jira Issue ${{ steps.issue-parser.outputs.parentKey }}/${{ steps.create.outputs.issue }} was created"
+        run: echo "Issue ${{ steps.create.outputs.issue }} was created"
 
       - name: Checkout develop code
         uses: actions/checkout@v4
