@@ -67,6 +67,7 @@ jobs:
           BRANCH_NAME="${ISSUE_NUMBER}-$(echo ${ISSUE_TITLE} | sed 's/ /-/g')"
           git checkout -b "${BRANCH_NAME}"
           git push origin "${BRANCH_NAME}"
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV  # Set environment variable
 
       - name: Update issue title
         uses: actions-cool/issues-helper@v3
