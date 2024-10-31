@@ -32,11 +32,6 @@ jobs:
       - name: cat parse result
         run: cat ${HOME}/issue-parser-result.json
 
-      - name: Log Issue Parser
-        run: |
-          echo "__ticket_number: ${{ steps.issue-parser.outputs.__ticket_number }}"
-          echo "jsonString:  ${{ steps.issue-parser.outputs.jsonString }}"
-
       - name: Convert markdown to Jira Syntax
         uses: peter-evans/jira2md@v1
         id: md2jira
@@ -86,5 +81,5 @@ jobs:
           actions: 'create-comment'
           token: ${{ secrets.GITHUB_TOKEN }}
           issue-number: ${{ github.event.issue.number }}
-          body: 'Jira Issue Created: [${{ steps.create.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create.outputs.issue }})\n fjsdlf'
+          body: 'Jira Issue Created: [${{ steps.create.outputs.issue }}](${{ secrets.JIRA_BASE_URL }}/browse/${{ steps.create.outputs.issue }})\nfjsdlf'
       
