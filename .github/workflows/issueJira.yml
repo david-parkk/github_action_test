@@ -65,6 +65,8 @@ jobs:
           ref: develop
 
       - name: Create branch with Ticket number
+        env:
+          ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
         run: |
           ISSUE_NUMBER="${{ steps.create.outputs.issue }}"
           ISSUE_TITLE="${{ steps.issue-parser.outputs.issueparser_branch}}"
