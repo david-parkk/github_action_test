@@ -25,6 +25,7 @@ body:
     attributes:
       label: '📝 상세 내용(Description)'
       description: '이슈에 대해서 간략히 설명해주세요'
+      value: '지라를 연동한다'
 
 
   - type: textarea
